@@ -1,4 +1,4 @@
--- DROP FUNCTION __donnees.create_trigger();
+-- This function creates a trigger for a bunch of tables, using two for loops (one for the schema, other for table name).
 
 CREATE OR REPLACE FUNCTION __donnees.create_trigger()
     RETURNS void
