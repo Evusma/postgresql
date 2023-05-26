@@ -20,7 +20,8 @@ BEGIN
 					      FROM _cadastre_plu_domaine.nsm_domaine_tout 
 					     WHERE ST_Contains(geom,NEW.geom2))))THEN
 		UPDATE _securite.nsm_squats
-		   SET geom = ST_AsEWKT(d.geom), geom2 = st_centroid(d.geom) -- ST_AsEWKT(d.geom);
+		   SET geom = ST_AsEWKT(d.geom), 
+		       geom2 = st_centroid(d.geom) -- ST_AsEWKT(d.geom);
 		  FROM _cadastre_plu_domaine.nsm_domaine_tout as d
 		 WHERE ST_Within(geom2, d.geom);
 		RETURN NEW;
