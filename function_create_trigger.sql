@@ -10,15 +10,13 @@ DECLARE
     d text;
     f text;
 BEGIN
-    FOR f IN
-	SELECT DISTINCT n.schemaname 
-	FROM pg_catalog.pg_tables as n 
-	WHERE n.schemaname NOT IN ('topology', 'information_schema', 'pgmetadata', '__projets', 'public', 'pg_catalog', '_formation')
+    FOR f IN SELECT DISTINCT n.schemaname 
+	       FROM pg_catalog.pg_tables as n 
+	      WHERE n.schemaname NOT IN ('topology', 'information_schema', 'pgmetadata', '__projets', 'public', 'pg_catalog', '_formation')
     LOOP	
-        FOR d IN
-	    SELECT b.tablename 
-	    FROM pg_catalog.pg_tables as b 
-	    WHERE b.schemaname = f
+        FOR d IN SELECT b.tablename 
+	           FROM pg_catalog.pg_tables as b 
+	          WHERE b.schemaname = f
 	LOOP
 	    EXECUTE 
 		'DROP TRIGGER IF EXISTS pgmetadata_date ON '||f||'.'||d||';
