@@ -1,4 +1,4 @@
--- Trigger function to update the date of last modification in the metadata table (metadata managed by the QGIS plugin pgmetadata);
+-- Trigger function to update the date of last modification of the data in the metadata table (metadata managed by the QGIS plugin pgmetadata);
 
 CREATE FUNCTION __donnees.pgmetadata_date_p()
     RETURNS trigger
@@ -11,7 +11,7 @@ BEGIN
 	UPDATE pgmetadata.dataset
 	   SET data_last_update = now() 
 	 WHERE table_name = TG_TABLE_NAME;
-	RETURN NEW;
+    RETURN NEW;
     END IF;
 END;
 $BODY$;
