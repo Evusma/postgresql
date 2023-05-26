@@ -11,7 +11,7 @@ BEGIN
 	UPDATE pgmetadata.dataset
 	   SET data_last_update = now() 
 	 WHERE table_name = TG_TABLE_NAME;
-    RETURN NEW;
+    	RETURN NEW;
     END IF;
 END;
 $BODY$;
