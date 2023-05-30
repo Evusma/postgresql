@@ -33,11 +33,11 @@ DECLARE
 BEGIN
 	
 	new_id_voie = (SELECT d.id_voie 
-				     FROM __donnees.voirie_nsm_inventaire as d 
-				    WHERE ST_Covers(ST_Buffer(d.geom,1),NEW.geom));
+			 FROM __donnees.voirie_nsm_inventaire as d 
+			WHERE ST_Covers(ST_Buffer(d.geom,1),NEW.geom));
 	new_rivoli = (SELECT d.rivoli 
-				    FROM __donnees.voirie_nsm_inventaire as d 
-				   WHERE ST_Covers(ST_Buffer(d.geom,1),NEW.geom));
+			FROM __donnees.voirie_nsm_inventaire as d 
+		       WHERE ST_Covers(ST_Buffer(d.geom,1),NEW.geom));
 
 	IF (new_id_voie IS NOT NULL) THEN
 	
@@ -66,15 +66,15 @@ DECLARE
 BEGIN
 
 	geom_condition = (SELECT ST_Buffer(d.geom,1) 
-					    FROM __donnees.voirie_nsm_inventaire as d 
-					   WHERE OLD.id_voie = d.id_voie);
+			    FROM __donnees.voirie_nsm_inventaire as d 
+			   WHERE OLD.id_voie = d.id_voie);
 
 	IF (OLD.id = NEW.id AND OLD.id_voie = NEW.id_voie AND ST_Covers(geom_condition,NEW.geom)) THEN	
 		UPDATE __donnees.voirie_nsm_sens_voies 
 		   SET geom = NEW.geom, 
 		       sens = NEW.sens, 
-			   observations = NEW.observations, 
-			   maj = now() 
+		       observations = NEW.observations, 
+		       maj = now() 
 		 WHERE id = OLD.id;		
 		RETURN NEW;		
 	END IF;
