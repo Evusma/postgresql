@@ -12,11 +12,11 @@ DECLARE
     f text;
 BEGIN
     FOR f IN SELECT DISTINCT n.schemaname 
-	       FROM pg_catalog.pg_tables as n 
+	       FROM pg_catalog.pg_tables AS n 
 	      WHERE n.schemaname NOT IN ('topology', 'information_schema', 'pgmetadata', '__projets', 'public', 'pg_catalog', '_formation')
     LOOP	
         FOR d IN SELECT b.tablename 
-	           FROM pg_catalog.pg_tables as b 
+	           FROM pg_catalog.pg_tables AS b 
 	          WHERE b.schemaname = f
 	LOOP
 	    EXECUTE 
