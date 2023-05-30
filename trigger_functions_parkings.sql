@@ -31,20 +31,20 @@ BEGIN
 
 	IF (OLD.id = NEW.id AND OLD.id_voie = NEW.id_voie AND ST_Covers(ST_Buffer(OLD.geom,5),NEW.geom)) THEN
 	
-		UPDATE __donnees.voirie_nsm_surface_voirie
-		   SET geom = NEW.geom,
-			   classement = NEW.classement, 
-			   maj = now() 
-		 WHERE id_voie = OLD.id_voie;
+		UPDATE  __donnees.voirie_nsm_surface_voirie
+		   SET  geom = NEW.geom,
+			classement = NEW.classement, 
+			maj = now() 
+		 WHERE  id_voie = OLD.id_voie;
 			
-		UPDATE __donnees.voirie_nsm_parking
-		   SET places_total = NEW.places_total, 
-			   places_bleue = NEW.places_bleue, 
-			   places_pmr = NEW.places_pmr,
-			   places_livraison = NEW.places_livraison,
-			   observations = NEW.observations,
-			   maj = now() 
-		 WHERE id = OLD.id;
+		UPDATE  __donnees.voirie_nsm_parking
+		   SET  places_total = NEW.places_total, 
+			places_bleue = NEW.places_bleue, 
+			places_pmr = NEW.places_pmr,
+			places_livraison = NEW.places_livraison,
+			observations = NEW.observations,
+			maj = now() 
+		 WHERE  id = OLD.id;
 		 RETURN NEW;
 	END IF;
 
