@@ -11,7 +11,7 @@ AS $BODY$
 BEGIN
 
 	DELETE FROM __donnees.voirie_nsm_zone_bleue
-	WHERE id=OLD.id and id_voie = OLD.id_voie;
+	WHERE id=OLD.id AND id_voie = OLD.id_voie;
 	
 	RETURN OLD;
 
@@ -33,11 +33,11 @@ DECLARE
 BEGIN
 	
 	new_id_voie = (SELECT d.id_voie 
-		         FROM __donnees.voirie_nsm_inventaire as d
+		         FROM __donnees.voirie_nsm_inventaire AS d
 		        WHERE ST_Covers(ST_Buffer(d.geom,10),NEW.geom));
 		
 	new_rivoli = (SELECT d.rivoli 
-			FROM __donnees.voirie_nsm_inventaire as d 
+			FROM __donnees.voirie_nsm_inventaire AS d 
 		       WHERE ST_Covers(ST_Buffer(d.geom,10),NEW.geom));
 
 	IF (new_id_voie IS NOT NULL) THEN
@@ -67,10 +67,10 @@ DECLARE
 BEGIN
 
 	geom_condition = (SELECT ST_Buffer(d.geom,10) 
-			    FROM __donnees.voirie_nsm_inventaire as d 
+			    FROM __donnees.voirie_nsm_inventaire AS d 
 			   WHERE OLD.id_voie = d.id_voie);
 
-	IF (OLD.id = NEW.id and OLD.id_voie = NEW.id_voie AND ST_Covers(geom_condition,NEW.geom)) THEN
+	IF (OLD.id = NEW.id AND OLD.id_voie = NEW.id_voie AND ST_Covers(geom_condition,NEW.geom)) THEN
 		UPDATE  __donnees.voirie_nsm_zone_bleue
 		   SET  geom = NEW.geom, 
 		        statut = NEW.statut, 
