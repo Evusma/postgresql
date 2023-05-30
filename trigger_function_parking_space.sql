@@ -17,7 +17,7 @@ BEGIN
 
 		new_id = nextval('_vrd_transport.nsm_stationnements_gid_seq'::regclass);	
 		new_id_voie = (SELECT d.id_voie 
-		 		 FROM  __donnees.voirie_nsm_inventaire as d, _vrd_transport.nsm_stationnements as f
+		 		 FROM  __donnees.voirie_nsm_inventaire AS d, _vrd_transport.nsm_stationnements AS f
 		 		WHERE (ST_Distance(NEW.geom,d.geom)<20) 
 				ORDER BY ST_Distance(NEW.geom,d.geom) ASC LIMIT 1);
 		new_id_stationnement = (SELECT '9350ST'||new_id
@@ -40,7 +40,7 @@ BEGIN
 	IF (TG_OP = 'UPDATE' AND OLD.gid = NEW.gid AND OLD.id_stationnement = NEW.id_stationnement AND OLD.id_voie = NEW.id_voie) THEN
 		
 		new_id_voie = (SELECT d.id_voie 
-		 		 FROM  __donnees.voirie_nsm_inventaire as d, _vrd_transport.nsm_stationnements as f
+		 		 FROM  __donnees.voirie_nsm_inventaire AS d, _vrd_transport.nsm_stationnements AS f
 		 		WHERE (ST_Distance(NEW.geom,d.geom)<20) 
 				ORDER BY ST_Distance(NEW.geom,d.geom) ASC LIMIT 1);
 			
