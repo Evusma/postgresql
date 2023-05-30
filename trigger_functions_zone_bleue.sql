@@ -1,4 +1,4 @@
--- three trigger function for data changes from a view
+-- three trigger functions for data changes from a view
 
 -- Function for the trigger instead of delete;
 
