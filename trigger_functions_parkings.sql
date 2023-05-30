@@ -11,7 +11,7 @@ AS $BODY$
 BEGIN
 
 	DELETE FROM __donnees.voirie_nsm_parking
-	WHERE id=OLD.id and id_voie = OLD.id_voie;
+	WHERE id=OLD.id AND id_voie = OLD.id_voie;
 	
 	RETURN OLD;
 
