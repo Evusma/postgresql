@@ -11,7 +11,7 @@ BEGIN
     d = (SELECT tablename
            FROM pg_catalog.pg_tables 
           WHERE tablename LIKE 'nsm_2016_20%' AND schemaname = '_pc_ads');
-    f = to_char(now(), 'yyyy');
+    f = (SELECT to_char(now( )- interval '1 year', 'yyyy'));
     EXECUTE 
 	'ALTER TABLE _pc_ads.'||d||' 
 	   RENAME TO nsm_2016_'||f||'_pc';
