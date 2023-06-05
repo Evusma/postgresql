@@ -15,7 +15,7 @@ BEGIN
   d = (SELECT tablename 
 	       FROM pg_catalog.pg_tables 
 		    WHERE tablename LIKE 'nsm_2016_20%' AND schemaname = '_foncier');
-	f = to_char(now(), 'yyyy');
+	f = (SELECT to_char(now( )- interval '1 year', 'yyyy'));
 
     EXECUTE
         'INSERT INTO '||c||'.'||d||' (geom, n_dia, date, parcelle, cp, ville, legende, surface_m2, prix, prix_m2) 
