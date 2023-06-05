@@ -12,9 +12,9 @@ DECLARE
 	f text; -- year
 BEGIN
 	c = '_foncier';
-  d = (SELECT tablename 
-	       FROM pg_catalog.pg_tables 
-		    WHERE tablename LIKE 'nsm_2016_20%' AND schemaname = '_foncier');
+        d = (SELECT tablename 
+	     FROM pg_catalog.pg_tables 
+	     WHERE tablename LIKE 'nsm_2016_20%' AND schemaname = '_foncier');
 	f = (SELECT to_char(now( )- interval '1 year', 'yyyy'));
 
     EXECUTE
